@@ -2,7 +2,7 @@
 # Portland Community College
 #
 # Template:
-# Factor the given polynomial 
+# Factor the given polynomial. 
 #
 #     ac x^2 + (bc+ad) x + bd
 #
@@ -40,7 +40,7 @@ loadMacros(
   "PCCmacros.pl",
   "contextLimitedFactor.pl",
   "answerHints.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -70,11 +70,11 @@ $ans = Compute("prime");
 TEXT(beginproblem());
 
 BEGIN_PGML
-Factor the given polynomial 
+Factor the given polynomial. 
 
     [`[$question]=`] [___________________]
 
-If the expression cannot be factored then answer with *prime*.
+[@KeyboardInstructions("If the expression cannot be factored then answer with [|prime|]*.")@]**
 END_PGML
 
 ANS($ans->cmp(typeMatch=>$question)->withPostFilter(AnswerHints(

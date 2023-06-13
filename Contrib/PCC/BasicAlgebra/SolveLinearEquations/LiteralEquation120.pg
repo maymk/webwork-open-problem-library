@@ -32,7 +32,7 @@ loadMacros(
   "PCCmacros.pl",
   "answerHints.pl",
   "SolveLinearEquationPCC.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -59,9 +59,7 @@ TEXT(beginproblem());
 
 BEGIN_PGML
 
-Solve this linear equation for [`x`]:
-
-    [`` y=mx-b``]  
+Solve this linear equation for [`x`]. [``` y=mx-b```]  
 
     [______________]
 

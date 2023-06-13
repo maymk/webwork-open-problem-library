@@ -23,8 +23,8 @@ loadMacros(
   "MathObjects.pl",
   "PGchoicemacros.pl",
   "answerHints.pl",
-  "PGinfo.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
+  "PCCmacros.pl",
 );
 
 ##############################################
@@ -35,25 +35,28 @@ Context("Numeric");
 
 $a =  random(1,10,1);
 do {$b=random(2,10,1);} until (gcd($a,$b)==1);
+# $a should not be 1. Doing thisawkward redefinition to avoid messing up
+# seeds in active use
+$a =  2 if ($a == 1);
 
 $mc = new_checkbox_multiple_choice();
 
 $mc -> qa (
-"Select all correct simplifications:", 
-"\( \frac{x+ $a}{x+$a}=1 \) $BR",
-"\( \frac{$b(x-$a)}{x -$a}=$b \) $BR",   
-"\( \frac{$a x}{x}=$a \) $BR",   
-"\( \frac{x}{$b x}=\frac{1}{$b} \) $BR",  
+"Select all correct simplifications, ignoring possible domain restrictions.",
+"\( \frac{x+ $a}{x+$a}=1 \) $BR$BR",
+"\( \frac{$b(x-$a)}{x -$a}=$b \) $BR$BR",
+"\( \frac{$a x}{x}=$a \) $BR$BR",
+"\( \frac{x}{$b x}=\frac{1}{$b} \) $BR$BR",
 );
 
 $mc -> extra(
-"\( \frac{x+$a}{x}=$a \) $BR",
-"\( \frac{x+$a}{$a}=x \) $BR",
-"\( \frac{$a}{x+$a}=\frac{1}{x} \) $BR",
-"\( \frac{$a}{x+$a}=\frac{1}{x+1} \) $BR",
-"\( \frac{$b x+$a}{$b}=x+$a \) $BR",
-"\( \frac{x+$a}{x+$b}=\frac{$a}{$b} \) $BR",
-"\( \frac{$b x+$a}{x + $a}=$b \) $BR", 
+"\( \frac{x+$a}{x}=$a \) $BR$BR",
+"\( \frac{x+$a}{$a}=x \) $BR$BR",
+"\( \frac{$a}{x+$a}=\frac{1}{x} \) $BR$BR",
+"\( \frac{$a}{x+$a}=\frac{1}{x+1} \) $BR$BR",
+"\( \frac{$b x+$a}{$b}=x+$a \) $BR$BR",
+"\( \frac{x+$a}{x+$b}=\frac{$a}{$b} \) $BR$BR",
+"\( \frac{$b x+$a}{x + $a}=$b \) $BR$BR",
 );
 
 
@@ -68,7 +71,7 @@ $BR
 \{ $mc -> print_a() \}
 
 $PAR
-To receive full credit, you must get each checkbox correct.
+\{KeyboardInstructions('To receive full credit, you must get each checkbox correct.')\}
 END_TEXT
 Context()->normalStrings;
 
@@ -94,7 +97,7 @@ We may cross out common terms when the operation is multiplication. For example,
 
 $BCENTER \( \frac{2x}{2} = \frac{x}{1} = x \) $ECENTER $BR$BR
 
-We may cross out common terms like \(x+$a\) when the "major" operation is multiplication. For example, the following is correct: $BR$BR
+We may cross out common factors like \(x+$a\) when the "major" operation is multiplication. For example, the following is correct: $BR$BR
 
 $BCENTER \( \frac{$b(x+$a)}{x+$a} = \frac{$b}{1} = $b \)$ECENTER $BR$BR
 

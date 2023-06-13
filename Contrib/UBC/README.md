@@ -5,3 +5,15 @@ Contributors (github):
 * chenhao6459new
 * changebo
 * adentremont
+* gohsc
+* jverrett
+* xinglong-li
+* jamescharbonneau
+* grrhendra
+* kirkeyj
+* msekatchev
+* capacapac
+* robynnewell
+* monabe
+* ishookie
+

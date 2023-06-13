@@ -33,7 +33,7 @@ loadMacros(
   "answerHints.pl",
   "contextFraction.pl",
   "SolveLinearEquationPCC.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -62,8 +62,6 @@ TEXT(beginproblem());
 BEGIN_PGML
 
 [@instructions(~~@vArray)@]**
-
-
 a)    [` [$a][$var]+[$b]=[$c][$var]+[$b] `]  
 
     [_______________________________]

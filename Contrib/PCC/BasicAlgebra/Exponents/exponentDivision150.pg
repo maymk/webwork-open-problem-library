@@ -41,7 +41,7 @@ loadMacros(
   "contextLimitedPolynomial.pl",
   "contextFraction.pl",
   "bizarroArithmetic.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -115,8 +115,7 @@ ANS($ans -> cmp(
       $student = Formula("$student"); $correct = Formula("$correct");
       return 0 unless ($correct == $student);
       Context()->flags->set(bizarroDiv=>1,bizarroMul=>1);
-      delete $correct->{test_values};
-      delete $student->{test_values};
+      delete $correct->{test_values}, $student->{test_values};
       Context()->flags->set(limits=>[0.25,0.4]);
       Value->Error("Your answer is correct, but please simplify it further") unless (($correct == $student) or ($student == $correct));
       Context()->flags->set(bizarroDiv=>0,bizarroMul=>0);
@@ -142,15 +141,13 @@ $solnStep[$n-$p] = Fraction($c*$d,$d);
 $solnStep = Formula("$solnStep[$n-$n] $var**$n+$solnStep[$n-$m] $var**$m +$solnStep[$n-$p] $var**$p");
 
 BEGIN_PGML_SOLUTION
-We divide each term by [`[$poly2]`] as follows
-
-    [`
+We divide each term by [`[$poly2]`] as follows. [```
     \begin{aligned}
     \displaystyle\frac{[$poly1]}{[$poly2]} & = \frac{[$d*$a][$var]^{[$n+2]}}{[$d][$var]^2}+\frac{[$b*$d][$var]^{[$m+2]}}{[$d][$var]^2}+\frac{[$c*$d][$var]^{[$p+2]}}{[$d][$var]^2}\\
     &=[$solnStep]\\
     &=[$ans]\\
     \end{aligned}
-`]
+```]
 
 END_PGML_SOLUTION
 ##############################################

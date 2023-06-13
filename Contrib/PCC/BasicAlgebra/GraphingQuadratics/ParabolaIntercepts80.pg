@@ -29,7 +29,8 @@ loadMacros(
   "PGstandard.pl",
   "MathObjects.pl",
   "PGML.pl",
-  "PGcourse.pl"
+  "PCCmacros.pl",
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -41,7 +42,7 @@ Context()->parens->set("{" => {type => "Set", close => "}"});
 Context()->parens->set("<" => {type => "Vector", close => ">"});
 Context()->flags->set(showExtraParens=>0, reduceConstants=>0);
 Context()->noreduce("(-x)-y","(-x)+y");
-Context()->strings->add("does not exist"=>{alias=>'dne'});
+Context()->strings->add("does not exist"=>{alias=>'DNE'});
 
 $a = 1;
 $c = non_zero_random(2,10,1);
@@ -59,11 +60,11 @@ $ansX = String("DNE");
 
 BEGIN_PGML
 
-Find the [`y`]-intercept and any [`x`]-intercept(s) of the quadratic function [`[$left]=[$right]`]. 
+Find the [`y`]-intercept and any [`x`]-intercept(s) of the quadratic curve. 
+ 
+[`[$left]=[$right]`]  
 
-If the parabola doesn't have any [`x`]-intercept, type *DNE*, meaning "does not exist."
-
-If the parabola has two [`x`]-intercepts, use comma to separate them.
+[@KeyboardInstructions("If the parabola does not have any [`x`]-intercept, type [|DNE|]*, meaning does not exist. If the parabola has two [`x`]-intercepts, use a comma to separate them.")@]**
 
     [`y`]-intercept: [________________]{$ansY}
 
@@ -106,7 +107,7 @@ Identify that [`a=[$a],b=[$b],c=[$c]`]. We have:
 
 The square root of a negative number us *not real*, so this quadratic equation has no real solution.
 
-The parabola doesn't have any [`x`]-intercept. Type *DNE* (does not exist) as the solution.
+The parabola doesn't have any [`x`]-intercept. Type [|DNE|]* (does not exist) as the solution.
 
 END_PGML_SOLUTION
 

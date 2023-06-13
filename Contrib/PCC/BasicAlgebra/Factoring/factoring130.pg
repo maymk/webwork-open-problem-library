@@ -2,7 +2,7 @@
 # Portland Community College
 #
 # Template:
-# Factor the given polynomial 
+# Factor the given polynomial. 
 #
 #     x ^3 + a x^2 + b x + a b
 #
@@ -33,8 +33,8 @@ loadMacros(
   "MathObjects.pl",
   "PGML.pl",
   "PCCmacros.pl",
-  "contextLimitedFactor.pl",
-  "PGcourse.pl"
+"contextLimitedFactor.pl",
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -63,11 +63,11 @@ $ans = Formula("($var^2+$b)*($var+$a)")->reduce;
 TEXT(beginproblem());
 
 BEGIN_PGML
-Factor the given polynomial 
+Factor the given polynomial. 
 
     [`[$question]=`] [___________________]{$ans}
 
-If the expression cannot be factored then answer with *prime*.
+[@KeyboardInstructions("If the expression cannot be factored then answer with [|prime|]*.")@]**
 END_PGML
 
 BEGIN_PGML_SOLUTION

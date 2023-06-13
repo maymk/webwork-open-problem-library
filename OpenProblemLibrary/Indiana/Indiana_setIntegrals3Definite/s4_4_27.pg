@@ -62,15 +62,13 @@ $ans = $p1 - $p2;
 ANS(num_cmp($ans));
 
 
-&SOLUTION(EV3(<<'EOT'));
+BEGIN_SOLUTION
 To evaluate the definite integral, we need to determine the 
 antiderivative of the formula to be integrated.  This can be
 done term-by-term by rewriting the integral as:
 \[
   \int_{$d1}^{$c1} \frac{{$a1}x^2 + $b1}{\sqrt{x}} dx = 
     \int_{$d1}^{$c1} \left( \frac{{$a1}x^2}{\sqrt{x}} + \frac{$b1}{\sqrt{x}}  \right) dx
-\]
-  
 \]
 Then, we can find the derivative, which is:
 \[
@@ -91,6 +89,6 @@ we get the value of the definite integral as:
   \end{aligned}
 \]
 
-EOT
+END_SOLUTION
 
 ENDDOCUMENT();        # This should be the last executable line in the problem.

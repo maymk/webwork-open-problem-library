@@ -2,7 +2,7 @@
 # Portland Community College
 #
 # Template:
-# Factor the given polynomial 
+# Factor the given polynomial. 
 #
 #     (A+B)x^2 + (A+B)(a+b) x + (A+B)ab
 #
@@ -34,8 +34,8 @@ loadMacros(
   "MathObjects.pl",
   "PGML.pl",
   "PCCmacros.pl",
-  "contextLimitedFactor.pl",
-  "PGcourse.pl"
+"contextLimitedFactor.pl",
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -66,11 +66,11 @@ $ans = Formula("($varA+$varB)($var+$a)*($var+$b)")->reduce;
 TEXT(beginproblem());
 
 BEGIN_PGML
-Factor the given polynomial 
+Factor the given polynomial. 
 
     [`[$question]=`] [___________________]{$ans}
 
-If the expression cannot be factored then answer with *prime*.
+[@KeyboardInstructions("If the expression cannot be factored then answer with [|prime|]*.")@]**
 END_PGML
 
 $step= Formula("($varA+$varB)($var^2+($a+$b)$var+$a*$b)")->reduce;

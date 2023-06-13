@@ -2,7 +2,7 @@
 # Portland Community College
 #
 # Template:
-# Factor the given polynomial 
+# Factor the given polynomial. 
 #
 #     a x^m (b x + c) + b x + c
 #
@@ -31,8 +31,8 @@ loadMacros(
   "MathObjects.pl",
   "PGML.pl",
   "PCCmacros.pl",
-  "contextLimitedFactor.pl",
-  "PGcourse.pl"
+"contextLimitedFactor.pl",
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -63,11 +63,11 @@ $ans = Formula("($a$var^$m+1)*($b$var+$c)")->reduce;
 TEXT(beginproblem());
 
 BEGIN_PGML
-Factor the given polynomial 
+Factor the given polynomial. 
 
     [`[$question]=`] [___________________]{$ans}
 
-If the expression cannot be factored then answer with *prime*.
+[@KeyboardInstructions("If the expression cannot be factored then answer with [|prime|]*.")@]**
 END_PGML
 
 $solnstep = Formula("$b$var+$c")->reduce;

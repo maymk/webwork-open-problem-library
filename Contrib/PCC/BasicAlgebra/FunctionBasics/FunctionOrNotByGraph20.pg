@@ -26,13 +26,13 @@
 DOCUMENT();
 
 loadMacros(
-  "PGstandard.pl",
   "PGgraphmacros.pl",
+  "PGstandard.pl",
   "MathObjects.pl",
   "PGML.pl",
   "PCCgraphMacros.pl",
-  "PGchoicemacros.pl",
-  "PGcourse.pl"
+  "parserPopUp.pl",
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -46,7 +46,6 @@ $refreshCachedImages=1;
 @ALT=();
 @isFunction=();
 @functions=([],[],[],[]);
-@radio=();
 for my $i (0..1) {
   $isFunction[$i]=random(0,1,1);
   if ($i==1) {do {$isFunction[$i]=random(0,1,1);} until ($isFunction[$i]!=$isFunction[$i-1]);}
@@ -78,11 +77,9 @@ for my $i (0..1) {
      $ALT[$i]="Graph $graphNum: This is a graph of a parabola opening to the $leftOrRight.";
   }
 
-   $isFunctionText = $isFunction[$i] ? "Yes" : "No";
-   $radio[$i] = new_multiple_choice();
+   $isFunctionText = $isFunction[$i] ? "does" : "does not";
    $graphNum = $i+1;
-   $radio[$i]->qa("Does the relationship in Graph $graphNum represent [`y`] as a function of [`x`]?", "$isFunctionText");
-   $radio[$i]->makeLast("Yes","No");
+   $popup[$i] = PopUp(['?','does','does not'], "$isFunctionText");
 }
 
 for my $i (2..3) {
@@ -110,17 +107,58 @@ for my $i (0..3) {
   $gr[$i]->lb('reset');
   for my $j (@xticks) {
     if (abs($j)<10**(-10)) {next;}
-    $gr[$i]->lb( new Label($j, -$marksep[1]/8, $j,'black','center','top'));
+    $gr[$i]->lb( new Label($j, 0, $j,'black','center','top','large'));
   }
 
   for my $j (@yticks) {
     if (abs($j)<10**(-10)) {next;}
-    $gr[$i]->lb( new Label($marksep[0]/8, $j, $j,'black','left','middle'));
+    $gr[$i]->lb( new Label(0, $j, $j,'black','right','middle','large'));
   }
 
   for my $j (0..1) {
      $fn[$i] = new Fun( $xfunc[$i], $yfunc[$i], $gr[$i] );
-     $fn[$i] -> domain(0,6.2832);
+     $fn[$i] -> domain(0,6.28);
+     $fn[$i] -> weight(1);
+  }
+
+  $gr[$i]->lb( new Label($max[0], 0, 'x','black','right','bottom','large'));
+  $gr[$i]->lb( new Label(0, $max[1], 'y','black','left','top','large'));
+
+  if ($isFunction[$i]==1 and $a > 0) {
+    @ends = num_sort($min[0],$max[0],sqrt(($max[1]-$k)/$a)+$h,-sqrt(($max[1]-$k)/$a)+$h);
+    $start = $ends[1]; $stop = $ends[2];
+    $pixel = ($max[0]-$min[0])/240;
+    $gr[$i]->moveTo($start+2*$pixel,$a*($start+2*$pixel-$h)**2+$k);
+    $gr[$i]->arrowTo($start,$a*($start-$h)**2+$k,'blue',1);
+    $gr[$i]->moveTo($stop-2*$pixel,$a*($stop-2*$pixel-$h)**2+$k);
+    $gr[$i]->arrowTo($stop,$a*($stop-$h)**2+$k,'blue',1);
+  }
+  elsif ($isFunction[$i]==1 and $a < 0) {
+    @ends = num_sort($min[0],$max[0],sqrt(($min[1]-$k)/$a)+$h,-sqrt(($min[1]-$k)/$a)+$h);
+    $start = $ends[1]; $stop = $ends[2];
+    $pixel = ($max[0]-$min[0])/240;
+    $gr[$i]->moveTo($start+2*$pixel,$a*($start+2*$pixel-$h)**2+$k);
+    $gr[$i]->arrowTo($start,$a*($start-$h)**2+$k,'blue',1);
+    $gr[$i]->moveTo($stop-2*$pixel,$a*($stop-2*$pixel-$h)**2+$k);
+    $gr[$i]->arrowTo($stop,$a*($stop-$h)**2+$k,'blue',1);
+  }
+  elsif ($isFunction[$i]==0 and $d > 0) {
+    @ends = num_sort($min[1],$max[1],sqrt(($max[0]+$b)*$d)+$c,-sqrt(($max[0]+$b)*$d)+$c);
+    $start = $ends[1]; $stop = $ends[2];
+    $pixel = ($max[1]-$min[1])/240;
+    $gr[$i]->moveTo(($start+2*$pixel-$c)**2/$d-$b,$start+2*$pixel);
+    $gr[$i]->arrowTo(($start-$c)**2/$d-$b,$start,'blue',1);
+    $gr[$i]->moveTo(($stop-2*$pixel-$c)**2/$d-$b,$stop-2*$pixel);
+    $gr[$i]->arrowTo(($stop-$c)**2/$d-$b,$stop,'blue',1);
+  }
+  elsif ($isFunction[$i]==0 and $d < 0) {
+    @ends = num_sort($min[1],$max[1],sqrt(($min[0]+$b)*$d)+$c,-sqrt(($min[0]+$b)*$d)+$c);
+    $start = $ends[1]; $stop = $ends[2];
+    $pixel = ($max[1]-$min[1])/240;
+    $gr[$i]->moveTo(($start+2*$pixel-$c)**2/$d-$b,$start+2*$pixel);
+    $gr[$i]->arrowTo(($start-$c)**2/$d-$b,$start,'blue',1);
+    $gr[$i]->moveTo(($stop-2*$pixel-$c)**2/$d-$b,$stop-2*$pixel);
+    $gr[$i]->arrowTo(($stop-$c)**2/$d-$b,$stop,'blue',1);
   }
 
 }
@@ -132,35 +170,19 @@ $ALT1 = $ALT[1];
 
 BEGIN_PGML
 
-The following graphs show two relationships.
+The following graphs show two relationships. Decide whether each graph shows a relationship where [`y`] is a function of [`x`].
 
 [@EnlargeImageStatementPGML()@]**
 
-Decide whether each graph represents [`y`] as a function of [`x`].
+>>[@image(insertGraph($gr[0]), width=>xScreen(), height=>yScreen(), tex_size=>TeXscalar(), extra_html_tags=>"alt = '$ALT0' title = '$ALT0'") @]* [@SPACE@]* [@SPACE@]* [@SPACE@]* [@SPACE@]* [@image(insertGraph($gr[1]), width=>xScreen(), height=>yScreen(), tex_size=>TeXscalar(), extra_html_tags=>"alt = '$ALT1' title = '$ALT1'") @]* <<
 
-[@$radio[0]->print_q()@]**
-[@$radio[0]->print_a()@]*
-
->>### Graph 1 ###  <<
-
->>[@image(insertGraph($gr[0]), width=>xScreen(), height=>yScreen(), tex_size=>TeXscalar(), extra_html_tags=>"alt = '$ALT0' title = '$ALT0'")@]*<<
-
-
-[@$radio[1]->print_q()@]**
-[@$radio[1]->print_a()@]*
-
->>### Graph 2 ###  <<
-
->>[@image(insertGraph($gr[1]), width=>xScreen(), height=>yScreen(), tex_size=>TeXscalar(), extra_html_tags=>"alt = '$ALT1' title = '$ALT1'")@]*<<
+The first graph [__]{$popup[0]} give a function of [`x`].  The second graph [__]{$popup[1]} give a function of [`x`].
 
 END_PGML
 
 ##############################################
 
 $showPartialCorrectAnswers = 0;
-
-ANS( radio_cmp( $radio[0]->correct_ans() ) );
-ANS( radio_cmp( $radio[1]->correct_ans() ) );
 
 #######################################################
 

@@ -27,12 +27,14 @@ DOCUMENT();
 #This section loads any and all .pl files that contain useful subroutines for the problem.
 
 loadMacros(
-  "PGstandard.pl",
-  "MathObjects.pl",
-  "PGML.pl",
+  "PGstandard.pl",       #Always needed
+  "MathObjects.pl",      #Almost always needed
+  "PGML.pl",             #Almost always needed
   "contextFraction.pl",
-  "contextLimitedRadical.pl",
-  "PGcourse.pl"
+  "contextLimitedRadical.pl"
+,
+  "PCCmacros.pl",
+  "PGcourse.pl",
 );
 
 ########Begin Problem Setup############
@@ -58,7 +60,9 @@ TEXT(beginproblem());
 BEGIN_PGML
 
 
-Simplify the following expression.
+Evaluate the following.
+
+[@KeyboardInstructions('If this expression is not a real number, enter [|not a real number|]*.')@]**
  
       [``\frac{[$a]}{\sqrt{[$c]}}``]  =   [_________]{$answer} .
 

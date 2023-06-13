@@ -32,7 +32,7 @@ loadMacros(
   "PCCmacros.pl",
   "answerHints.pl",
   "SolveLinearEquationPCC.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -73,17 +73,11 @@ TEXT(beginproblem());
 
 BEGIN_PGML
 
-a)  Solve this linear equations for [`[$var1]`].
+a. Solve [` [$r][$var1]+[$s]=[$t]  `] for [`[$var1]`].  
+   [_______] 
 
-    [` [$r][$var1]+[$s]=[$t]  `]  
-
-    [_______] 
-
-b)   Solve this linear equations for [`[$var2]`].
-
-    [` [$var3][$var2]+[$var4]=[$var5]  `]  
-
-    [_______] 
+a. Solve [` [$var3][$var2]+[$var4]=[$var5]  `] for [`[$var2]`].  
+   [_______] 
 
 END_PGML
 

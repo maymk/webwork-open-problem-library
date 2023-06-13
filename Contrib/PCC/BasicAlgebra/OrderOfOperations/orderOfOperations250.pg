@@ -32,7 +32,7 @@ loadMacros(
   "MathObjects.pl",
   "PGML.pl",
   "contextFraction.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -66,7 +66,7 @@ TEXT(beginproblem());
 
 BEGIN_PGML
 
-Evaluate this expression:
+Evaluate the following.
 
     [`` [$frac1]+[$a]\cdot[$frac2]=  ``]  [________]{$ans} 
 

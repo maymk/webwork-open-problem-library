@@ -4,7 +4,7 @@
 # Template
 #
 #
-# Evaluate this expression:
+# Evaluate the following.
 #
 #    [`` [$a]-[$b]\cdot[$c]=  ``]  [________]{$ans} 
 # 
@@ -33,7 +33,7 @@ loadMacros(
   "MathObjects.pl",
   "PGML.pl",
   "answerHints.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -52,7 +52,7 @@ TEXT(beginproblem());
 
 BEGIN_PGML
 
-Evaluate this expression:
+Evaluate the following.
 
     [`` [$a]-[$b]\cdot[$c]=  ``]  [________]
 

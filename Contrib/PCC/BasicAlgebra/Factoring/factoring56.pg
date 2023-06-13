@@ -2,7 +2,7 @@
 # Portland Community College
 #
 # Template:
-# Factor the given polynomial 
+# Factor the given polynomial. 
 #
 #     a * c x^2 + a * b
 #
@@ -31,8 +31,8 @@ loadMacros(
   "MathObjects.pl",
   "PGML.pl",
   "PCCmacros.pl",
-  "contextLimitedFactor.pl",
-  "PGcourse.pl"
+"contextLimitedFactor.pl",
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -52,8 +52,10 @@ Context()->noreduce('(-x)-y', '(-x)+y');
 
 
 # the common term 
-$a = random(2,10,1);
-$b = random(2,10,1)*random(-1,1,2);
+do {
+   $a = random(2,10,1);
+   $b = random(2,10,1)*random(-1,1,2);
+} until (sqrt(abs($b)) != int(sqrt(abs($b))));
 $c = $b;
 $c = random(2,10,1) while(gcf($c,$b)!=1);
 $ans = Formula("$a*($c*$var^2+$b)")->reduce;
@@ -61,11 +63,11 @@ $ans = Formula("$a*($c*$var^2+$b)")->reduce;
 TEXT(beginproblem());
 
 BEGIN_PGML
-Factor the given polynomial 
+Factor the given polynomial. 
 
     [`[$a*$c][$var]^2+[$a*$b]=`] [___________________]{$ans}
 
-If the expression cannot be factored then answer with *prime*.
+[@KeyboardInstructions('If the expression cannot be factored then answer with [|prime|]*.')@]**
 END_PGML
 
 BEGIN_PGML_SOLUTION

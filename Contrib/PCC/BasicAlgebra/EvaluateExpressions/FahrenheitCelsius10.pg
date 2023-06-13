@@ -32,7 +32,8 @@ loadMacros(
   "PGML.pl",
   "contextFraction.pl",
   "parserNumberWithUnits.pl",
-  "PGcourse.pl"
+  "PCCmacros.pl",
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -63,13 +64,9 @@ TEXT(beginproblem());
 
 BEGIN_PGML
 
-To convert a temperature measured in degrees Fahrenheit to degrees Celsius, there is a formula:
+To convert a temperature measured in degrees Fahrenheit to degrees Celsius, there is a formula: [``` C=[$func] ```] where [`C`] represents the temperature in degrees Celsius and [`F`] represents the temperature in degrees Fahrenheit.
 
-     [`` C=[$func] ``]
-
-where [`C`] represents the temperature in degrees Celsius and [`F`] represents the temperature in degrees Fahrenheit.
-
-If a temperature is [`[$plugIn] {^\circ}\text{F}`], what is that temperature measured in Celsius? Use *degC* for [`^{\circ}\text{C}`] and *degF* for [`^{\circ}\text{F}`].
+If a temperature is [`[$plugIn] {^\circ}\text{F}`], what is that temperature measured in Celsius? [@KeyboardInstructions(q!(Use [|degC|]* for [`^{\circ}\text{C}`] and [|degF|]* for [`^{\circ}\text{F}`].)!)@]**
 
     [_______]{$ans}
 

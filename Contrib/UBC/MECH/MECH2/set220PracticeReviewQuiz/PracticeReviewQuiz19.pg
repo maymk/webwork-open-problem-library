@@ -1,17 +1,40 @@
 ##DESCRIPTION
-## Preview Test: Mech 220 Practice Review Quiz
+##
+## Created by the UBC Department of Mechanical Engineering. Project led by Agnes d'Entremont.
+##
+## Contact: agnes.dentremont@mech.ubc.ca
+##
+## This work is licensed under the Creative Commons
+## Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+## <https://creativecommons.org/licenses/by-sa/4.0/>
+##
+## We gratefully acknowledge the financial support for this 
+## project provided by UBC Vancouver students via the Teaching
+## and Learning Enhancement Fund. We also gratefully acknowledge
+## additional funding support from BCcampus, the UBC Department of
+## Mechanical Engineering, and the UBC Applied Science Dean’s Office.  
+##
+## This work was completed on the traditional, ancestral, and unceded
+## territory of the Musqueam people. 
+##
 ##ENDDESCRIPTION
 
-##KEYWORDS('multiple choice', 'free', 'body', 'diagram', 'uniform', 'bar')
-
-## DBsubject('MECH 220')
-## DBchapter('Practice Quizzes')
-## DBsection('Practice Review Quiz')
-## Date('7/5/2017')
+## DBsubject('Statics')
+## DBchapter('Rigid bodies')
+## DBsection('Free-body diagrams')
 ## Institution('University of British Columbia')
-## Problem19
+## Author('UBC MECH2')
+## Date('7/5/2017')
+## Level()
+## KEYWORDS('UBC', 'Mech2', 'MECH220', 'Practice Review Quiz', '220PRQ', 'multiple choice', 'free', 'body', 'diagram', 'uniform', 'bar')
+## RESOURCES('220-practice-19q.png', '220-practice-19aa.png', '220-practice-19ab.png', '220-practice-19ac.png', '220-practice-19ad.png', '220-practice-19ae.png')
+## TitleText('TBD')
+## EditionText('TBD')
+## AuthorText('TBD')
+## Section('TBD')
+## Problem('TBD')
+## Beginner
 
-########################################################################
 
 DOCUMENT();      
 
@@ -21,7 +44,7 @@ loadMacros(
   "parserRadioButtons.pl",
   "PGcourse.pl"
 );
-
+TEXT(beginproblem());
 $mc = RadioButtons(
     [ "A", "B", "C", "D", "E" ]
     , "D"
@@ -29,14 +52,14 @@ $mc = RadioButtons(
     ,labels => "ABC" );
 
 BEGIN_TEXT
-\{ image( "220ReviewQuiz-19.gif", width=>250, height=>239) \} $PAR
+\{ image( "220-practice-19q.png", width=>250, height=>239) \} $PAR
 
 Select the correct free body diagram for the uniform bar shown in the figure above. (More than one diagram may be technically correct; select the most appropriate diagram.) The bar has weight W and gravity acts downwards. 
-$PAR A: \{ image( "220ReviewQuiz-19a.gif", width=>250, height=>196) \}
-$PAR B: \{ image( "220ReviewQuiz-19b.gif", width=>250, height=>182) \}
-$PAR C: \{ image( "220ReviewQuiz-19c.gif", width=>250, height=>127) \}
-$PAR D: \{ image( "220ReviewQuiz-19d.gif", width=>250, height=>127) \}
-$PAR E: \{ image( "220ReviewQuiz-19e.gif", width=>250, height=>147) \}
+$PAR A: \{ image( "220-practice-19aa.png", width=>250, height=>196) \}
+$PAR B: \{ image( "220-practice-19ab.png", width=>250, height=>182) \}
+$PAR C: \{ image( "220-practice-19ac.png", width=>250, height=>127) \}
+$PAR D: \{ image( "220-practice-19ad.png", width=>250, height=>127) \}
+$PAR E: \{ image( "220-practice-19ae.png", width=>250, height=>147) \}
 $PAR
 \{ $mc->buttons() \}
 

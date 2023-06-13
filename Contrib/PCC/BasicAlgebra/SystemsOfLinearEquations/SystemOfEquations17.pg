@@ -36,7 +36,7 @@ loadMacros(
   "contextFraction.pl",
   "parserAssignment.pl",
   "SystemsOfLinearEquationsProblemPCC.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -91,15 +91,15 @@ SystemOfLinearEquationsProblemSetup();
 ##############################################
 TEXT(beginproblem());
 BEGIN_PGML
-Solve the following system of equations, using whichever method you wish.
+Solve the following system of equations.
 
-    [`\left\{
+[```\left\{
     \begin{aligned}
       [$left1] & =  [$right1]\\
       [$left2] & =  [$right2] 
     \end{aligned}
     \right.
-    `]
+    ```]
 
 [$EnterAnswers]**
 

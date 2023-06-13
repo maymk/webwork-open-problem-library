@@ -32,7 +32,7 @@ loadMacros(
   "PCCmacros.pl",
   "answerHints.pl",
   "SolveLinearEquationPCC.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -73,7 +73,6 @@ BEGIN_PGML
 
 
 Solve these linear equations for [`[$var1]`].
-
 a)  [` \frac{[$var1]}{[$den]}+[$a]=[$b]  `]  
 
     [_______]

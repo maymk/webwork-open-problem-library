@@ -31,9 +31,9 @@ loadMacros(
   "PGstandard.pl",
   "MathObjects.pl",
   "PGML.pl",
+  "PGcourse.pl",
   "contextFraction.pl",
   "PCCmacros.pl",
-  "PGcourse.pl"
 );
 
 ##############################################
@@ -60,7 +60,7 @@ TEXT(beginproblem());
 
 BEGIN_PGML
 
-Change the following decimal to fraction:
+Write the decimal number as a fraction.
 
 [`[$dec]`] = [___________]{$frac}
 
@@ -74,7 +74,6 @@ The integer part of the decimal [`[$dec]`] will not change. We will only change 
 
 [`[$decPart]`] is read as [$decWord], so it can be written as [`\frac{[$num]}{100}`], which can be reduced to [`[$fracPart]`] by dividing [`[$factor]`] in both the numerator and denominator.
 
-*Solution:*
 
     [`` [$dec] = [$frac] ``]
 

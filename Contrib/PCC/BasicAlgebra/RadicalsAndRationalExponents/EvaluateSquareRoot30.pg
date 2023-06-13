@@ -25,10 +25,12 @@ DOCUMENT();
 ########Begin Load Macro Files############
 
 loadMacros(
-  "PGstandard.pl",
-  "MathObjects.pl",
-  "PGML.pl",
-  "PGcourse.pl"
+  "PGstandard.pl",       #Always needed
+  "MathObjects.pl",      #Almost always needed
+  "PGML.pl",             #Almost always needed
+,
+  "PCCmacros.pl",
+  "PGcourse.pl",
 );
 
 ########Begin Problem Setup############
@@ -53,13 +55,11 @@ TEXT(beginproblem());
 
 BEGIN_PGML
 
+Evaluate the following.
 
+[@KeyboardInstructions('If this expression is not a real number, enter [|not a real number|]*.')@]**
 
-Evaluate [:sqrt(-[$a**2]):] or state that the expression is *not a real number*.
-
-
-
-    [:sqrt(-[$a**2]):] is [______________]{$answer}.
+    [:sqrt(-[$a**2])=:][______________]{$answer}.
 
 END_PGML
 
@@ -67,7 +67,7 @@ END_PGML
 
 BEGIN_PGML_SOLUTION
 
-The square root of a negative number is *not a real number*.
+The square root of a negative number is [|not a real number|]*.
 
 END_PGML_SOLUTION
 

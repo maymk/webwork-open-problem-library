@@ -1,17 +1,40 @@
 ##DESCRIPTION
-## Preview Test: Mech 220 Practice Review Quiz
+##
+## Created by the UBC Department of Mechanical Engineering. Project led by Agnes d'Entremont.
+##
+## Contact: agnes.dentremont@mech.ubc.ca
+##
+## This work is licensed under the Creative Commons
+## Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+## <https://creativecommons.org/licenses/by-sa/4.0/>
+##
+## We gratefully acknowledge the financial support for this 
+## project provided by UBC Vancouver students via the Teaching
+## and Learning Enhancement Fund. We also gratefully acknowledge
+## additional funding support from BCcampus, the UBC Department of
+## Mechanical Engineering, and the UBC Applied Science Dean’s Office.  
+##
+## This work was completed on the traditional, ancestral, and unceded
+## territory of the Musqueam people. 
+##
 ##ENDDESCRIPTION
 
-##KEYWORDS('multiple choice', 'ring', 'angular', 'velocity', 'kinetic', 'energy')
-
-## DBsubject('MECH 220')
+## DBsubject('Dynamics')
 ## DBchapter('Practice Quizzes')
 ## DBsection('Practice Review Quiz')
-## Date('7/5/2017')
 ## Institution('University of British Columbia')
-## Problem11
+## Author('UBC MECH2')
+## Date('7/5/2017')
+## Level()
+## KEYWORDS('UBC', 'Mech2', 'MECH220', 'Practice Review Quiz', '220PRQ', 'multiple choice', 'ring', 'angular', 'velocity', 'kinetic', 'energy')
+## RESOURCES('220-practice-11q.png')
+## TitleText('TBD')
+## EditionText('TBD')
+## AuthorText('TBD')
+## Section('TBD')
+## Problem('TBD')
+## Beginner
 
-########################################################################
 
 DOCUMENT();      
 
@@ -21,7 +44,7 @@ loadMacros(
   "parserRadioButtons.pl",
   "PGcourse.pl"
 );
-
+TEXT(beginproblem());
 $mc = RadioButtons(
     [ "\( KE = (1/4) Mw^2R^2 \)", "\( KE = (1/2) Mw^2R^2 \)", "\( KE = (1/4) Mw^2R^3 \)", "\( KE = (1/4) Mw^3R^2 \)", "None of the above" ]
     , "\( KE = (1/2) Mw^2R^2 \)"
@@ -32,7 +55,7 @@ BEGIN_TEXT
 
 A ring of extremely dense material has a mass \(M\) and a radius \(R\). It spins at angular velocity \(w\) \(rad/s\). What is the kinetic energy, \(KE\), stored in the ring? (Hint: start with the kinetic energy of a small particle translating at velocity, \(V\), and integrate to form the ring rotating at angular velocity, \(w\).)
 $PAR
-\{ image( "220ReviewQuiz-11.gif", width=>350, height=>266) \}
+\{ image( "220-practice-11q.png", width=>350, height=>266) \}
 $PAR
 \{ $mc->buttons() \}
 

@@ -2,7 +2,7 @@
 # Portland Community College
 #
 # Template:
-# Factor the given polynomial 
+# Factor the given polynomial. 
 #
 #     ac x^2n + (bc+ad) x^n + bd
 #
@@ -40,7 +40,7 @@ loadMacros(
   "PGML.pl",
   "PCCmacros.pl",
   "contextLimitedFactor.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -81,11 +81,11 @@ $ans = Formula("($a*$var^$n+$b)*($c*$var^$n+$d)")->reduce;
 TEXT(beginproblem());
 
 BEGIN_PGML
-Factor the given polynomial 
+Factor the given polynomial. 
 
     [`[$question]=`] [___________________]{$ans}
 
-If the expression cannot be factored then answer with *prime*.
+[@KeyboardInstructions("If the expression cannot be factored then answer with [|prime|]*.")@]**
 END_PGML
 
 $step = Formula("$a$var")->reduce;

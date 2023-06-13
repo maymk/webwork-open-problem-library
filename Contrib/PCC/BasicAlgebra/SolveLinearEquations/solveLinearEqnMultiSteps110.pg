@@ -38,7 +38,7 @@ loadMacros(
   "answerHints.pl",
   "contextFraction.pl",
   "SolveLinearEquationPCC.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -71,7 +71,7 @@ BEGIN_PGML
 
 [@instructions(~~@vArray)@]**
 
-    [`` [$left] = [$right]  ``]  
+    [` [$left] = [$right]  `]  
 
     [_______________________________] 
 
@@ -85,7 +85,7 @@ answerCheck($ansEqRef, $eqTypesRef);
 
 BEGIN_PGML_SOLUTION
 
-    [``
+The first step is to subtract terms in order to separate the variable and non-variable terms. [```
 \begin{aligned}
  [$a][$var]  +[$b] &= [$var]  +[$d] \\
 [$a][$var]  +[$b]\mathbf{{}-[$var]-[$b]} &= [$var]  +[$d]\mathbf{{}-[$var]-[$b]} \\
@@ -93,7 +93,7 @@ BEGIN_PGML_SOLUTION
  \frac{[$a-$c][$var]}{[$a-$c]} & = \frac{[$d-$b]}{[$a-$c]} \\
  [$var]      &= [$ans]
 \end{aligned}
-    ``]
+    ```]
 
 [@summary($ansEqRef->[0],$left,$right);@]** 
 

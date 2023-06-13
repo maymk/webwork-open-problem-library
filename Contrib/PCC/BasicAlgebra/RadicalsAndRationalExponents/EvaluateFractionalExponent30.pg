@@ -27,13 +27,14 @@ loadMacros(
   "PGstandard.pl",
   "MathObjects.pl",
   "PGML.pl",
-  "PGcourse.pl"
+  "PCCmacros.pl",
+  "PGcourse.pl",
 );
 
 ######################################
 
 TEXT(beginproblem());
-Context("Numeric");
+Context("LimitedNumeric");
 
 $radD = random(2,5,1);
 if ($radD==5) {$num=2**5;}
@@ -52,7 +53,7 @@ $ans = $num**($radN/$radD);
 
 BEGIN_PGML
 
-Without using a calculator, evaluate the expression:
+Without using a calculator, evaluate the expression.
 
     [`` \sqrt[[$radD]]{[$num]^{[$radN]}}= ``][__________]{$ans}
 

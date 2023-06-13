@@ -25,13 +25,14 @@
 DOCUMENT();
 
 loadMacros(
-  "PGstandard.pl",
   "PGgraphmacros.pl",
+  "PGstandard.pl",
   "MathObjects.pl",
   "PGML.pl",
   "contextFraction.pl",
+  "PCCmacros.pl",
   "PCCgraphMacros.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -45,6 +46,7 @@ $num=random(1,9,1);
 do {$den=random(2,9,1);} until (gcd($den,$num)==1);
 
 $m = -Fraction($num,$den);
+$mperl = -$num/$den;
 
 Context("Numeric");
 $b = random(-4,4,1);
@@ -68,6 +70,22 @@ $pt2=Compute("($x2,$y2)");
 @xticks = @$xticks_ref;
 @yticks = @$yticks_ref;
 
+my @ticksep;
+for my $i (0,1) {
+  $ticksep[$i] = ($max[$i] - $min[$i])/$ticknum[$i];
+};
+
+#Make sure the grid lines cover the two points
+$scale[0] = 1;
+while ((Real($scale[0]*$x1 / $ticksep[0]) != Real(int($scale[0]*$x1 / $ticksep[0]))) or (Real($scale[0]*$x2 / $ticksep[0]) != Real(int($scale[0]*$x2 / $ticksep[0])))) {$scale[0] = $scale[0] + 1};
+$scale[1] = 1;
+while ((Real($scale[1]*$y1 / $ticksep[1]) != Real(int($scale[1]*$y1 / $ticksep[1]))) or (Real($scale[1]*$y2 / $ticksep[1]) != Real(int($scale[1]*$y2 / $ticksep[1])))) {$scale[1] = $scale[1] + 1};
+
+for my $i (0,1) {
+  $ticknum[$i] = $ticknum[$i]*$scale[$i];
+};
+
+
 for my $i (0,1) {
   $gr[$i] = init_graph($min[0],$min[1],$max[0],$max[1],
    axes=>[0,0],
@@ -77,22 +95,30 @@ for my $i (0,1) {
   $gr[$i]->lb('reset');
   for my $j (@xticks) {
     if (abs($j)<10**(-10)) {next;}
-    $gr[$i]->lb( new Label($j, -$marksep[1]/8, $j,'black','center','top'));
+    $gr[$i]->lb( new Label($j, -$marksep[1]/8, $j,'black','center','top','large'));
   }
 
   for my $j (@yticks) {
     if (Real($j) == 0) {next;}
-    $gr[$i]->lb( new Label($marksep[0]/8, $j, $j,'black','left','middle'));
+    $gr[$i]->lb( new Label($marksep[0]/8, $j, $j,'black','left','middle','large'));
   }
 
-add_functions($gr[$i], "$m*x+$b for x in <$min[0],$max[0]> using color:blue and weight:1");
+($start,$stop) = (num_sort($min[0],$max[0],($min[1]-$b)/$mperl,($max[1]-$b)/$mperl))[1,2];
+$gr[$i]->moveTo($x1,$y1);
+$gr[$i]->arrowTo($start,$mperl*$start+$b,'blue',1);
+$gr[$i]->moveTo($x1,$y1);
+$gr[$i]->arrowTo($stop,$mperl*$stop+$b,'blue',1);
+
+$gr[$i]->stamps( closed_circle($x1,$y1,'blue') );
+$gr[$i]->stamps( closed_circle($x2,$y2,'blue') );
+
 }
 
 ##############################################
 Context("LimitedFraction");
 BEGIN_PGML
 
-A line's graph is shown below. [@EnlargeImageStatementPGML()@]**
+Below is a line's graph. [@EnlargeImageStatementPGML()@]**
 
 
 END_PGML
@@ -105,7 +131,7 @@ $PAR
 END_TEXT
 BEGIN_PGML
 
-    The slope of this line is [___________]{$m}. (If the slope does not exist, enter *DNE* or *NONE*.)  
+    The slope of this line is [___________]{$m}. [@KeyboardInstructions('(If the slope does not exist, enter [|DNE|]* or [|NONE|]*.)')@]**  
 
 END_PGML
 ##############################################

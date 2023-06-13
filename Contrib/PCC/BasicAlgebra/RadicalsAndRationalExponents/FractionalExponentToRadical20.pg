@@ -27,16 +27,15 @@ loadMacros(
   "PGstandard.pl",
   "MathObjects.pl",
   "PGML.pl",
-  "contextFraction.pl",
-  "contextLimitedRadical.pl",
-  "parserRadioButtons.pl",
-  "PGcourse.pl"
+  "contextForm.pl",
+  "PCCmacros.pl",
+  "PGcourse.pl",
 );
 
 ######################################
 
 TEXT(beginproblem());
-Context("Numeric");
+Context("Form");
 $var = list_random('x','y','z','t','r','m','n','a','b','c');
 Context()->variables->are($var=>'Real');
 $showPartialCorrectAnswers = 1;
@@ -47,60 +46,19 @@ do {
 } until (gcd($a,$b)==1);
 
 
-#Create a hash and its inverse that randomizes the order of the four choices.
-%scramble = ();
-%inverse = ();
-for my $i (0..3) {
-  do {$temp = list_random(0..3)} until !(grep(/^$temp$/,values %scramble) );
-  $scramble{$i} = $temp;
-  $inverse{$temp} = $i;
-};
-
-#Create 4 choices
-@choices=();
-
-$choices[$scramble{0}] = "\frac{1}{\sqrt[$b]{$var^{$a}}}";
-
-$choices[$scramble{1}] = "-\sqrt[$b]{$var^{$a}}";
-
-$choices[$scramble{2}] = "\frac{1}{\sqrt[$a]{$var^{$b}}}";
-
-$choices[$scramble{3}] = "-\sqrt[$a]{$var^{$b}}";
-
-$radio = RadioButtons(
-  ["A","B","C","D"],
-  $ALPHABET[$scramble{0}], # correct answer
-  order => ["A","B","C","D"], separator=>$BR.$SPACE.$SPACE.$SPACE
-);
+$answer = Formula("1/root($b,$var^$a)");
 
 #####################################################
 
 BEGIN_PGML
 
-Convert [` [$var]^{-\frac{[$a]}{[$b]}} `] to a radical.
+Convert [` [$var]^{-\frac{[$a]}{[$b]}} `] to a radical expression.
+
+[@KeyboardInstructions("To enter [`\\sqrt[n]{x}`], type [|root(n,x)|]*.");@]**
+
+[__]{$answer}{10}
 
 END_PGML
-
-Context()->texStrings;
-BEGIN_TEXT
-
-$PAR
-$SPACE$SPACE$SPACE A: $SPACE$SPACE$SPACE \( $choices[0] \)
-$PAR
-$SPACE$SPACE$SPACE B: $SPACE$SPACE$SPACE \( $choices[1] \)
-$PAR
-$SPACE$SPACE$SPACE C: $SPACE$SPACE$SPACE \( $choices[2] \)
-$PAR
-$SPACE$SPACE$SPACE D: $SPACE$SPACE$SPACE \( $choices[3] \)
-$PAR
-$SPACE$SPACE$SPACE\{ $radio->buttons() \}
-
-END_TEXT
-Context()->normalStrings;
-
-############################################################
-
-ANS( $radio->cmp() );
 
 ##############################################
 
@@ -124,8 +82,6 @@ For this problem, we have:
    &= \frac{1}{\sqrt[[$b]]{[$var]^[$a]}} 
 \end{aligned}
     ``]
-
-The correct answer is [`[@ $radio->correct_ans() @]*`].
 
 END_PGML_SOLUTION
 

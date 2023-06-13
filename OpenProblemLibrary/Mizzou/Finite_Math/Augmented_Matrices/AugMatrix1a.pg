@@ -258,7 +258,7 @@ $PAR
 $PAR
 
 $BCENTER
-\{ display_matrix([ [ans_rule(5),ans_rule(5),ans_rule(5)], [ans_rule(5),ans_rule(5),ans_rule(5)] ], align=>rrvr) \}
+\{ display_matrix([ [ans_rule(5),ans_rule(5),ans_rule(5)], [ans_rule(5),ans_rule(5),ans_rule(5)] ], align=>'rrvr') \}
 $ECENTER
 
 $PAR
@@ -268,7 +268,7 @@ $PAR
 $PAR
 
 $BCENTER
-\{ display_matrix([ [ans_rule(5),ans_rule(5),ans_rule(5)], [ans_rule(5),ans_rule(5),ans_rule(5)] ], align=>rrvr) \}
+\{ display_matrix([ [ans_rule(5),ans_rule(5),ans_rule(5)], [ans_rule(5),ans_rule(5),ans_rule(5)] ], align=>'rrvr') \}
 $ECENTER
 
 $PAR
@@ -278,17 +278,17 @@ $PAR
 $PAR
 
 $BCENTER
-\{ display_matrix([ [ans_rule(5),ans_rule(5),ans_rule(5)], [ans_rule(5),ans_rule(5),ans_rule(5)] ], align=>rrvr) \}
+\{ display_matrix([ [ans_rule(5),ans_rule(5),ans_rule(5)], [ans_rule(5),ans_rule(5),ans_rule(5)] ], align=>'rrvr') \}
 $ECENTER
 
 $PAR
 
-(d) Finish simplifying the augmented matrix.  The reduced matrix is:
+(d) Finish simplifying the augmented matrix to reduced row echelon form.  The reduced matrix is:
 
 $PAR
 
 $BCENTER
-\{ display_matrix([ [ans_rule(5),ans_rule(5),ans_rule(5)], [ans_rule(5),ans_rule(5),ans_rule(5)] ], align=>rrvr) \}
+\{ display_matrix([ [ans_rule(5),ans_rule(5),ans_rule(5)], [ans_rule(5),ans_rule(5),ans_rule(5)] ], align=>'rrvr') \}
 $ECENTER
 
 $PAR

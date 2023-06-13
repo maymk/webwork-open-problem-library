@@ -32,7 +32,7 @@ loadMacros(
   "PCCmacros.pl",
   "answerHints.pl",
   "SolveLinearEquationPCC.pl",
-  "PGcourse.pl"
+  "PGcourse.pl",
 );
 
 ##############################################
@@ -66,13 +66,11 @@ TEXT(beginproblem());
 
 BEGIN_PGML
 
-Solve this linear equation for [`r`]:
-
-    [`` C=2 \pi r  ``]  
+Solve this linear equation for [`r`]. [``` C=2 \pi r  ```]  
 
     [______________]
 
-Use *pi* to represent [`\pi`].
+[@KeyboardInstructions(q!Use [|pi|]* to represent [`\pi`].!)@]**
 
 END_PGML
 

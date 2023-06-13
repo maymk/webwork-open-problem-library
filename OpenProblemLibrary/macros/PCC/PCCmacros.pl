@@ -18,6 +18,25 @@ To use it, load the macro file:
 =cut
 
 ###############################
+#Name: perlround
+#Input: a number to round, then a place to round to. e.g. 2=>hundredths, 0=>whole, -1=>tens
+#Output: $x rounded to the $n place. This attempts to overcome quirks with rounding when the cut part is like 0.005
+################################
+sub perlround {
+  # number to round
+  my $x = shift;
+  # place to round. e.g. 2=>hundredths, 0=>whole, -1=>tens
+  my $n = shift;
+  # "fix" non-integer input
+  $n = int($n);
+  # corresponding integer to round up or down
+  my $X = $x*10**$n;
+  $X = ($X-sprintf("%.0f", $X) eq 0.5) ? int($X+1) : sprintf("%.0f", $X);
+  return $X/10**$n;
+}
+
+
+###############################
 #Name: RandomName
 #Input: None required
 #Optional Input: 'sex' => male or female
@@ -107,7 +126,6 @@ $sex = 'both' unless defined($sex);
             'Sydney',
             'Tammy',
             'Teresa',
-            'Tien',
             'Tiffany',
             'Tracei',
             'Virginia',
@@ -175,6 +193,7 @@ $sex = 'both' unless defined($sex);
              'Shane',
              'Stephen',
              'Thanh',
+             'Tien',
              'Timothy',
              'Wenwu',
              'Will');
@@ -213,9 +232,9 @@ $type = 'all' unless defined($type);
 
 @varlist = ('x',
             'y',
-            'z',
+           # 'z',
             'r',
-            's',
+           # 's',
             't',);
 
 @constlist = ('a',
@@ -837,7 +856,9 @@ sub radicalListCheck {
      my ($i, $j, $k);              # loop counters
      return (0, @errors) if $ansHash->{isPreview};
      my $fullStudent = $ansHash->{student_formula};
-     my $fullCorrect = Formula($ansHash->{correct_ans});
+     #in line below, correct_ans seems the right thing to do. In some problems, this is blank, so I'm just going with correct_value
+     # for those problems. But changing to correct_value broke other problems... so the conditional hack
+     my $fullCorrect = ($ansHash->{correct_ans}) ? Formula($ansHash->{correct_ans}) : Formula($ansHash->{correct_value});
 
      my @fullStudentValue = $fullStudent->value;
      my @fullCorrectValue = $fullCorrect->value;
@@ -862,7 +883,7 @@ sub radicalListCheck {
               push(@errors,"This equation does have some solutions.");
               $nosolutionMessageGiven = 1;
            }
-       elsif($p->type ne "Assignment") {
+           elsif($p->type ne "Assignment") {
            push(@errors,"Your $ith entry should be written $var=_____");
            $assingmentMessageGiven = 1;
            }
@@ -885,8 +906,9 @@ sub radicalListCheck {
           my ($numericallyCorrect, $reduced);
           for ($k = 0, $numericallyCorrect = 0; ($k < $m) ; $k++) {
                     $q = $fullCorrectValue[$k];
-                    if ($q == $p) {
+                    if (Formula($q) == Formula($p)) {
                           $numericallyCorrect = 1;
+                          my ($setSqrt, $setRoot) = (Context()->flag("setSqrt"), Context()->flag("setRoot"));
                           Context()->flags->set(checkSqrt => $setSqrt, checkRoot => $setRoot, bizarroAdd => 1, bizarroSub => 1, bizarroMul => 1, bizarroDiv => 1);
                           delete $p->{test_values};
                           delete $q->{test_values};
@@ -918,7 +940,11 @@ sub radicalListCheck {
      return ($score,@errors);
    }
 
-
+# Keyboard instructions should only be displayed in HTML output
+sub KeyboardInstructions {
+   my $in = shift;
+   if ($displayMode =~ /HTML/) {return $in}
+}
 
 
 1;
